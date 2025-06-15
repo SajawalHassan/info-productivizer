@@ -1,9 +1,13 @@
+"use client";
+
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import FloatingOrbs from "./floating-orbs";
 
 const Hero = () => {
+  const getSummary = async () => {};
+
   return (
     <section id="hero" className="relative w-full pt-32 pb-20 md:pt-48 md:pb-32 text-center overflow-hidden">
       <FloatingOrbs />
