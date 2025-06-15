@@ -1,31 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
-
-const pricingTiers = [
-  {
-    name: "Basic",
-    price: "$9",
-    description: "For individuals and creators just getting started.",
-    features: ["1 YouTube Channel", "Basic Analytics", "Email Support"],
-    cta: "Get Started",
-  },
-  {
-    name: "Pro",
-    price: "$29",
-    description: "For growing creators and small businesses.",
-    features: ["5 YouTube Channels", "Advanced Analytics", "AI Suggestions", "Priority Support"],
-    cta: "Choose Pro",
-    popular: true,
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    description: "For large teams and agencies managing multiple channels.",
-    features: ["Unlimited Channels", "Full API Access", "Dedicated Manager", "24/7 Support"],
-    cta: "Contact Us",
-  },
-];
+import { pricingTiers } from "@/data/pricing";
 
 const Pricing = () => {
   return (
@@ -38,12 +14,12 @@ const Pricing = () => {
             Choose the plan that's right for you. All plans come with a 14-day free trial.
           </p>
         </div>
-        <div className="mx-auto grid max-w-md items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3 mt-12">
+        <div className="mx-auto grid max-w-md items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3 2xl:flex 2xl:items-center 2xl:justify-center mt-12 2xl:max-w-[1100px] 2xl:mx-auto 2xl:flex-wrap">
           {pricingTiers.map((tier) => (
             <div
               key={tier.name}
-              className={`relative flex flex-col p-6 rounded-lg shadow-lg bg-background transition-transform duration-300 hover:scale-105 hover:shadow-2xl ${
-                tier.popular ? "border-2 border-primary animate-glow" : "border border-border"
+              className={`relative m-auto flex flex-col p-6 rounded-lg shadow-lg bg-background transition-transform duration-300 hover:scale-105 hover:shadow-2xl h-[30rem] w-[20rem] ${
+                tier.popular ? "border-2 border-primary animate-glow 2xl:!h-[35rem] 2xl:!w-[22rem]" : "border border-border"
               }`}
             >
               {tier.popular && (
@@ -53,8 +29,8 @@ const Pricing = () => {
               )}
               <h3 className="text-2xl font-bold text-center">{tier.name}</h3>
               <div className="mt-4 text-center text-muted-foreground">
-                <span className="text-4xl font-bold">{tier.price}</span>
-                {tier.price.startsWith("$") && <span className="text-lg">/month</span>}
+                <span className="text-4xl font-bold">${tier.price}</span>
+                {tier.price && <span className="text-lg">/month</span>}
               </div>
               <p className="mt-4 text-center text-muted-foreground h-12">{tier.description}</p>
               <ul className="mt-8 space-y-4">
