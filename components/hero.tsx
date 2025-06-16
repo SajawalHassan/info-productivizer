@@ -1,12 +1,25 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+
 import FloatingOrbs from "./floating-orbs";
+import axios from "axios";
+import { LoaderIcon } from "lucide-react";
 
 const Hero = () => {
-  const getSummary = async () => {};
+  const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const getSummary = async () => {
+    setLoading(true);
+    const transcript = await axios.post(`/api/gemini`, { prompt });
+    console.log(transcript.data.text);
+    setResponse(transcript.data.text);
+    setLoading(false);
+  };
 
   return (
     <section id="hero" className="relative w-full pt-32 pb-20 md:pt-48 md:pb-32 text-center overflow-hidden">
@@ -24,11 +37,18 @@ const Hero = () => {
 
         <div className="max-w-2xl mx-auto animate-fade-in [animation-delay:0.6s]">
           <div className="flex w-full items-center space-x-2">
-            <Input type="text" placeholder="Enter a youtube link" className="flex-1 h-12 text-base" />
-            <Button type="submit" size="lg" className="h-12">
-              Go!
+            <Input
+              type="text"
+              placeholder="Enter a youtube link"
+              className="flex-1 h-12 text-base"
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+            />
+            <Button type="submit" size="lg" className="h-12" onClick={getSummary}>
+              {loading ? <LoaderIcon /> : "Go!"}
             </Button>
           </div>
+          <p>{response}</p>
         </div>
 
         <div className="flex items-center justify-center my-6 animate-fade-in [animation-delay:0.8s]">
