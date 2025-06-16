@@ -45,10 +45,10 @@ const Hero = () => {
               onChange={(e) => setPrompt(e.target.value)}
             />
             <Button type="submit" size="lg" className="h-12" onClick={getSummary}>
-              {loading ? <LoaderIcon /> : "Go!"}
+              {loading ? <LoaderIcon className="animate-spin" /> : "Go!"}
             </Button>
           </div>
-          <p>{response}</p>
+          <p className="whitespace-pre-wrap break-words text-left">{response}</p>
         </div>
 
         <div className="flex items-center justify-center my-6 animate-fade-in [animation-delay:0.8s]">
