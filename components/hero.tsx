@@ -14,11 +14,15 @@ const Hero = () => {
   const [loading, setLoading] = useState(false);
 
   const getSummary = async () => {
-    setLoading(true);
-    const transcript = await axios.post(`/api/gemini`, { prompt });
-    console.log(transcript.data.text);
-    setResponse(transcript.data.text);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const transcript = await axios.post(`/api/gemini`, { prompt });
+      setResponse(transcript.data.text);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
